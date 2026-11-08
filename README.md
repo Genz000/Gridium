@@ -2,7 +2,7 @@
 
 Grid-shift type tool. Your text, or an image, is seen through a grid of square windows. Each window slides the letterform a little further than the last, so it breaks into offset slices that can be squeezed, turned and set in motion. Exports PNG, JPG or editable SVG.
 
-**Try it:** https://genz000.github.io/gridium/ (desktop browser, window at least 1024 px wide)
+**Try it:** https://genz000.github.io/Gridium/ (desktop browser, window at least 1024 px wide)
 
 ## What it does
 
