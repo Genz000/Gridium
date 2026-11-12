@@ -24,6 +24,20 @@ export function GridCanvas() {
   const viewportActive = useToolcraftViewportInteractionActive();
   const settings = useMemo(() => readGridSettings(values), [values]);
 
+  // The runtime restores a collapsed panel from the last visit; Gridium always opens with every control in view.
+  const controlsPanel = useToolcraftSelector((state) => state.panels.controls);
+  const panelOpened = useRef(false);
+  useEffect(() => {
+    if (panelOpened.current) return;
+    panelOpened.current = true;
+    if (controlsPanel.collapsed || controlsPanel.hidden) {
+      dispatch({ type: "panels.update", panelId: "controls", patch: { collapsed: false, hidden: false } });
+    }
+    for (const sectionId of Object.keys(controlsPanel.collapsedSections ?? {})) {
+      dispatch({ type: "panels.setSectionCollapsed", sectionId, collapsed: false });
+    }
+  }, [controlsPanel, dispatch]);
+
   const loopSeconds = loopSecondsFor(settings.speed);
   useEffect(() => {
     if (Math.abs(loopSeconds - durationSeconds) > 0.001) {
